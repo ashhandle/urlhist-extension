@@ -5,7 +5,11 @@
   "description": "Records browsed URLs across all tabs to URLHIST.txt via a native messaging host.",
   "permissions": [
     "tabs",
-    "nativeMessaging"
+    "nativeMessaging",
+    "scripting"
+  ],
+  "host_permissions": [
+    "<all_urls>"
   ],
   "background": {
     "service_worker": "background.js"

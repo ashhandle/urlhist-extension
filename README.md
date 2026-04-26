@@ -19,11 +19,14 @@ native-host/urlhist_host.py
 
 Output format:
 ```
-2026-04-26 09:15:02  https://example.com, Example Domain
+2026-04-26 09:15:02  https://example.com, Example Domain, My App
 2026-04-26 09:15:44  https://another-site.com, Another Site
 2026-04-26 09:16:01  https://no-title-page.com
 ```
-The page title (from the `<title>` tag) is appended after the URL, comma-separated. If the page has no title the URL is written alone.
+Each line contains up to three comma-separated fields after the timestamp:
+- **URL** — always present
+- **Title** — from the page's `<title>` tag (omitted if empty)
+- **Name** — from `<meta name="name" content="...">` (omitted if not present)
 
 ## Requirements
 

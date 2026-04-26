@@ -37,9 +37,15 @@ def main():
         url = message.get("url", "")
         timestamp = message.get("timestamp", "")
         title = message.get("title", "").strip()
+        name = message.get("name", "").strip()
 
         if url:
-            line = f"{timestamp}  {url}, {title}" if title else f"{timestamp}  {url}"
+            fields = [url]
+            if title or name:
+                fields.append(title)
+            if name:
+                fields.append(name)
+            line = f"{timestamp}  " + ", ".join(fields)
             with open(URLHIST_PATH, "a", encoding="utf-8") as f:
                 f.write(line + "\n")
 

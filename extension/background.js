@@ -14,14 +14,22 @@ chrome.tabs.onUpdated.addListener((_tabId, changeInfo, tab) => {
   const timestamp = new Date().toISOString().replace("T", " ").substring(0, 19);
   const title = tab.title || "";
 
-  chrome.runtime.sendNativeMessage(
-    NATIVE_HOST,
-    { url, timestamp, title },
-    (_response) => {
-      if (chrome.runtime.lastError) {
-        console.log("Native host error:", chrome.runtime.lastError.message);
-        
-      }
+  chrome.scripting.executeScript(
+    {
+      target: { tabId: tab.id },
+      func: () => document.querySelector('meta[name="name"]')?.content ?? ""
+    },
+    (results) => {
+      const name = chrome.runtime.lastError ? "" : (results?.[0]?.result?.trim() || "");
+      chrome.runtime.sendNativeMessage(
+        NATIVE_HOST,
+        { url, timestamp, title, name },
+        (_response) => {
+          if (chrome.runtime.lastError) {
+            console.log("Native host error:", chrome.runtime.lastError.message);
+          }
+        }
+      );
     }
   );
 });
