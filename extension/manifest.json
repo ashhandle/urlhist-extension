@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "URL History Tracker",
+  "version": "1.0",
+  "description": "Records browsed URLs across all tabs to URLHIST.txt via a native messaging host.",
+  "permissions": [
+    "tabs",
+    "nativeMessaging"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  }
+}

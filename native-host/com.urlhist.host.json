@@ -1,0 +1,9 @@
+{
+  "name": "com.urlhist.host",
+  "description": "Appends browsed URLs to URLHIST.txt in the OS temp directory.",
+  "path": "__PLACEHOLDER__",
+  "type": "stdio",
+  "allowed_origins": [
+    "chrome-extension://__EXTENSION_ID__/"
+  ]
+}
