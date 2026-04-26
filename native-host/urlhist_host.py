@@ -36,10 +36,12 @@ def main():
 
         url = message.get("url", "")
         timestamp = message.get("timestamp", "")
-        #os.chmod(URLHIST_PATH, 0o700) 
+        title = message.get("title", "").strip()
+
         if url:
+            line = f"{timestamp}  {url}, {title}" if title else f"{timestamp}  {url}"
             with open(URLHIST_PATH, "a", encoding="utf-8") as f:
-                f.write(f"{timestamp}  {url}\n")
+                f.write(line + "\n")
 
         send_message({"status": "ok"})
 

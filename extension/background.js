@@ -12,10 +12,11 @@ chrome.tabs.onUpdated.addListener((_tabId, changeInfo, tab) => {
   if (!url || shouldSkip(url)) return;
 
   const timestamp = new Date().toISOString().replace("T", " ").substring(0, 19);
+  const title = tab.title || "";
 
   chrome.runtime.sendNativeMessage(
     NATIVE_HOST,
-    { url, timestamp },
+    { url, timestamp, title },
     (_response) => {
       if (chrome.runtime.lastError) {
         console.log("Native host error:", chrome.runtime.lastError.message);
